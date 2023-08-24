@@ -6,7 +6,7 @@ function UploadOne({ navigation }) {
   const getFontSize = (size) => size / fontScale;
 
   return (
-    <View className="bg-[#1c1c1c] h-[100vh] pt-[32px] px-[16px]">
+    <View className="bg-[#1c1c1c] h-[100vh] pt-[48px] px-[16px]">
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Home");

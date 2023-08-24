@@ -23,6 +23,11 @@ import AddBillingAddress from "./screens/addBillingAddress";
 import PaymentAccount from "./screens/paymentAccount";
 import AddAccount from "./screens/addAccount";
 import SocialMedia from "./screens/socialMedia";
+import Profile from "./screens/profile";
+import Cart from "./screens/cart";
+import SavedItems from "./screens/saved";
+import MyUploads from "./screens/myUploads";
+import MyOrders from "./screens/myOrders";
 
 const Stack = createStackNavigator();
 
@@ -133,6 +138,31 @@ export default function App() {
         <Stack.Screen
           name="SocialMedia"
           component={SocialMedia}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Saved"
+          component={SavedItems}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MyUploads"
+          component={MyUploads}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MyOrders"
+          component={MyOrders}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

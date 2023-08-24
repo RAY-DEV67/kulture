@@ -12,7 +12,7 @@ function Navbar({}) {
   const navigation = useNavigation();
 
   return (
-    <View className="flex-row justify-between items-center px-[32px] pb-[8px] pt-[16px] border-t-[0.2px] border-white bg-[#1c1c1c]">
+    <View className="flex-row justify-between items-center px-[32px] pb-[20px] pt-[16px] border-t-[0.2px] border-white bg-[#1c1c1c]">
       <TouchableOpacity
         className={`flex-col items-center ${
           screen === "Home" ? "bg-[#ceb0f3] p-[10px] rounded-[8px]" : ""
@@ -55,6 +55,7 @@ function Navbar({}) {
         }`}
         onPress={() => {
           setscreen("Cart");
+          navigation.navigate("Cart");
         }}
       >
         <FontAwesome
