@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, PixelRatio } from "react-native";
+import { View, Image, Text, TouchableOpacity, PixelRatio } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 function UploadOne({ navigation }) {
@@ -22,25 +22,34 @@ function UploadOne({ navigation }) {
       </Text>
 
       <View>
-        <TouchableOpacity className="bg-gray-400 px-[32px] h-[18vh] flex-col justify-center rounded-[8px]">
-          <View className="flex-row">
-            <Text>Image</Text>
+        <TouchableOpacity className="bg-[#434343] px-[32px] h-[18vh] flex-col justify-center rounded-[8px]">
+          <View className="flex-row items-center">
+          <Image
+          source={require("../assets/ep.png")}
+          className="object-contain"
+        />
             <Text className="ml-[32px] text-white font-semibold">Single</Text>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className="bg-gray-400 px-[32px] h-[18vh] flex-col justify-center rounded-[8px] my-[16px]">
-          <View className="flex-row">
-            <Text>Image</Text>
+        <TouchableOpacity className="bg-[#434343] px-[32px] h-[18vh] flex-col justify-center rounded-[8px] my-[16px]">
+          <View className="flex-row items-center">
+          <Image
+          source={require("../assets/single.png")}
+          className="object-contain"
+        />
             <Text className="ml-[32px] text-white font-semibold">
               Extended Plays (EP)
             </Text>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className="bg-gray-400 px-[32px] h-[18vh] flex-col justify-center rounded-[8px]">
-          <View className="flex-row">
-            <Text>Image</Text>
+        <TouchableOpacity className="bg-[#434343] px-[32px] h-[18vh] flex-col justify-center rounded-[8px]">
+          <View className="flex-row items-center">
+          <Image
+          source={require("../assets/lp.png")}
+          className="object-contain"
+        />
             <Text className="ml-[32px] text-white font-semibold">
               Long Plays (LP)
             </Text>

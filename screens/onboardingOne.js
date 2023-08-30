@@ -19,17 +19,17 @@ export default function OnboardingOne({ navigation }) {
   return (
     <View>
       <View
-        className={`bg-[#1c1c1c] flex-col items-center justify-center h-[100vh] px-[16px]`}
+        className={`bg-[#1c1c1c] flex-col items-center  h-[100vh] px-[16px]`}
       >
-        {/* <View>
-          <Image
-          //   source={require("../../assets/onboardingOne.png")}
-          />
-        </View> */}
-
-        <Text>Image</Text>
+        <Image
+          source={require("../assets/onb1.png")}
+          className="w-[100vw] rounded-full object-contain"
+        />
         <View>
-          <Text style={{ fontSize: getFontSize(25) }} className="text-white font-semibold">
+          <Text
+            style={{ fontSize: getFontSize(25) }}
+            className="text-white font-semibold"
+          >
             Upload Unlimited Beats
           </Text>
           <Text style={{ fontSize: getFontSize(15) }} className="text-white">

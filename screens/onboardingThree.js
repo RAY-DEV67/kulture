@@ -19,15 +19,12 @@ export default function OnboardingThree({ navigation }) {
   return (
     <View>
       <View
-        className={`bg-[#1c1c1c] flex-col items-center justify-center h-[100vh] px-[16px]`}
+        className={`bg-[#1c1c1c] flex-col items-center h-[100vh] px-[16px]`}
       >
-        {/* <View>
-            <Image
-            //   source={require("../../assets/onboardingOne.png")}
-            />
-          </View> */}
-
-        <Text>Image</Text>
+       <Image
+          source={require("../assets/onb3.png")}
+          className="w-[100vw] rounded-full object-contain"
+        />
         <View>
           <Text
             style={{ fontSize: getFontSize(25) }}

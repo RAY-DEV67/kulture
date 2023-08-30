@@ -91,7 +91,10 @@ export default function ForgotPassword({ navigation }) {
   };
   return (
     <View className="pt-[32px] px-[16px] bg-[#1c1c1c] h-[100vh]">
-      <Text>Logo</Text>
+      <Image
+        source={require("../assets/logo.png")}
+        className="w-[30vw] h-[10vw] mt-[16px] rounded-full object-contain"
+      />
       <Text
         style={{ fontSize: getFontSize(18) }}
         className="text-white font-semibold my-[16px]"
@@ -102,7 +105,10 @@ export default function ForgotPassword({ navigation }) {
         Enter your registered mail below to receive password reset information.
       </Text>
 
-      <Text className="my-[16px]">Image</Text>
+      <Image
+        source={require("../assets/fp1.png")}
+        className="my-[16px] object-contain"
+      />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -152,8 +158,6 @@ export default function ForgotPassword({ navigation }) {
                 textStyle={{ color: "#FFF" }}
               />
             </TouchableOpacity>
-
-       
           </View>
         )}
       </Formik>

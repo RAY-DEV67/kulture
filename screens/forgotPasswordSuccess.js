@@ -39,7 +39,10 @@ export default function ForgotPasswordSuccess({ navigation }) {
 
   return (
     <View className="pt-[32px] px-[16px] bg-[#1c1c1c] h-[100vh]">
-      <Text>Logo</Text>
+      <Image
+        source={require("../assets/logo.png")}
+        className="w-[30vw] h-[10vw] mt-[16px] rounded-full object-contain"
+      />
       <Text
         style={{ fontSize: getFontSize(18) }}
         className="text-white font-semibold my-[16px]"
@@ -51,7 +54,10 @@ export default function ForgotPasswordSuccess({ navigation }) {
         password.
       </Text>
 
-      <Text className="my-[16px]">Image</Text>
+      <Image
+        source={require("../assets/fp2.png")}
+        className="mt-[16px] object-contain"
+      />
 
       <TouchableOpacity
         className="bg-[#6600e8] py-[16px] rounded-[10px] mt-[32px]"

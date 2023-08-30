@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity, PixelRatio } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function MyOrders() {
+function MyOrders({navigation}) {
   const fontScale = PixelRatio.getFontScale();
   const getFontSize = (size) => size / fontScale;
 

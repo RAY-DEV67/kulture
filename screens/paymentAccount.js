@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Text, View, TouchableOpacity, PixelRatio } from "react-native";
+import { Text, View, TouchableOpacity, PixelRatio, Image } from "react-native";
 
 function PaymentAccount({ navigation }) {
   const fontScale = PixelRatio.getFontScale();
@@ -28,7 +28,10 @@ function PaymentAccount({ navigation }) {
       </Text>
 
       <View className="flex-col items-center justify-center">
-        <Text>Payment Image</Text>
+      <Image
+        source={require("../assets/paymentImage.png")}
+        className="mt-[16px] rounded-full object-contain"
+      />
         <Text className="text-white">No billing payment were found</Text>
       </View>
 

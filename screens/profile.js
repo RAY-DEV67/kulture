@@ -6,11 +6,12 @@ import {
   PixelRatio,
   Image,
   Animated,
+  ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
 
-function Profile({navigation}) {
+function Profile({ navigation }) {
   const fontScale = PixelRatio.getFontScale();
   const getFontSize = (size) => size / fontScale;
 
@@ -44,7 +45,10 @@ function Profile({navigation}) {
         My Profile
       </Text>
 
-      <View className="bg-red-300 m-[16px] p-[16px] flex-row items-center rounded-[10px]">
+      <ImageBackground
+        source={require("../assets/bg.png")}
+        className="m-[16px] p-[16px] flex-row items-center rounded-[10px]"
+      >
         <Image
           source={require("../assets/noProfile.jpg")}
           className="w-[30vw] rounded-full object-contain h-[30vw] mr-[8px]"
@@ -53,7 +57,10 @@ function Profile({navigation}) {
           <View className="bg-[#1c1c1c] p-[16px]  rounded-[10px]">
             <Text className=" text-white text-center">Username username</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("UploadOne")} className="bg-[#6600e8] p-[16px] mt-[8px] rounded-[10px]">
+          <TouchableOpacity
+            onPress={() => navigation.navigate("UploadOne")}
+            className="bg-[#6600e8] p-[16px] mt-[8px] rounded-[10px]"
+          >
             <Text
               className="text-white text-center font-semibold"
               style={{ fontSize: getFontSize(15) }}
@@ -62,16 +69,18 @@ function Profile({navigation}) {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ImageBackground>
 
       <View className="mx-[16px]">
         <View className="flex-row justify-between items-center">
           <Text className="text-white" style={{ fontSize: getFontSize(24) }}>
             Intro
           </Text>
-          <TouchableOpacity onPress={() => {
-          navigation.navigate("EditProfileInformation");
-        }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("EditProfileInformation");
+            }}
+          >
             <Text
               className="text-blue-600 font-semibold"
               style={{ fontSize: getFontSize(15) }}
@@ -87,10 +96,25 @@ function Profile({navigation}) {
         </Text>
 
         <View className="flex-row gap-3">
-          <Text className="text-white">Location Icon Location</Text>
-          <Text className="text-white">Icon</Text>
-          <Text className="text-white">Fb Icon</Text>
-          <Text className="text-white">Ig Icon</Text>
+          <Text className="text-white">
+            <Image
+              source={require("../assets/location.png")}
+              className=" object-contain"
+            />{" "}
+            Location
+          </Text>
+          <Image
+            source={require("../assets/dribbble.png")}
+            className=" object-contain"
+          />
+          <Image
+            source={require("../assets/fbIcon.png")}
+            className=" object-contain"
+          />
+          <Image
+            source={require("../assets/igIcon.png")}
+            className=" object-contain"
+          />
         </View>
       </View>
 

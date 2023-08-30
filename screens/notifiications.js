@@ -1,4 +1,4 @@
-import { View, Text, PixelRatio, TouchableOpacity } from "react-native";
+import { View, Text, PixelRatio, TouchableOpacity,Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -7,9 +7,9 @@ function Notifications() {
   const getFontSize = (size) => size / fontScale;
   return (
     <View className="bg-[#1c1c1c] h-[100vh] pt-[32px] px-[16px]">
-      <View className="flex-row justify-between mb-[32px]">
-        <Text className="text-white">Logo</Text>
-        <View className="flex-row">
+      <View className="flex-row justify-between items-center mb-[32px]">
+      <Ionicons name="chevron-back" size={24} color="white" />
+        <View className="flex-row items-center">
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Search");
@@ -25,7 +25,10 @@ function Notifications() {
           >
             <Ionicons name="notifications" size={24} color="white" />
           </TouchableOpacity>
-          <Text>Avatar</Text>
+          <Image
+            source={require("../assets/noProfile.jpg")}
+            className="w-[10vw] h-[10vw] rounded-full object-contain"
+          />
         </View>
       </View>
 

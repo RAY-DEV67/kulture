@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, PixelRatio } from "react-native";
+import { View, Text, TouchableOpacity, PixelRatio, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 function AccountSettings({ navigation }) {
@@ -29,7 +29,10 @@ function AccountSettings({ navigation }) {
         }}
       >
         <View className="flex-row">
-          <Text className="text-white">profile icon</Text>
+        <Image
+            source={require("../assets/profileIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Profile Information</Text>
         </View>
 
@@ -40,7 +43,10 @@ function AccountSettings({ navigation }) {
         navigation.navigate("SocialMedia")
       }} className="flex-row justify-between bg-[#292929] px-[16px] py-[10px]">
         <View className="flex-row">
-          <Text className="text-white">social icon</Text>
+        <Image
+            source={require("../assets/LinkIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Social media links</Text>
         </View>
 
@@ -54,7 +60,10 @@ function AccountSettings({ navigation }) {
         className="flex-row justify-between bg-[#292929] px-[16px] py-[10px]"
       >
         <View className="flex-row">
-          <Text className="text-white">payment icon</Text>
+        <Image
+            source={require("../assets/paymentIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Payment Accounts</Text>
         </View>
 
@@ -68,7 +77,10 @@ function AccountSettings({ navigation }) {
         }}
       >
         <View className="flex-row">
-          <Text className="text-white">billing icon</Text>
+        <Image
+            source={require("../assets/BillingIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Billing Address</Text>
         </View>
 

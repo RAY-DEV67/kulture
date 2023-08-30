@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, PixelRatio } from "react-native";
+import { View, Text, TouchableOpacity, PixelRatio, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 function Options({ navigation }) {
@@ -27,7 +27,10 @@ function Options({ navigation }) {
         className="flex-row justify-between bg-[#292929] px-[16px] mt-[16px] py-[10px]"
       >
         <View className="flex-row">
-          <Text className="text-white">profile icon</Text>
+          <Image
+            source={require("../assets/profileIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">My Profile</Text>
         </View>
 
@@ -46,7 +49,10 @@ function Options({ navigation }) {
         className="flex-row justify-between bg-[#292929] px-[16px] mt-[16px] py-[10px]"
       >
         <View className="flex-row">
-          <Text className="text-white">save icon</Text>
+          <Image
+            source={require("../assets/SaveIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Save for later</Text>
         </View>
 
@@ -62,7 +68,10 @@ function Options({ navigation }) {
 
       <View className="flex-row justify-between bg-[#292929] px-[16px] mt-[16px] py-[10px]">
         <View className="flex-row">
-          <Text className="text-white">download icon</Text>
+          <Image
+            source={require("../assets/DownloadIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Downloads</Text>
         </View>
 
@@ -74,7 +83,10 @@ function Options({ navigation }) {
         className="flex-row justify-between bg-[#292929] px-[16px] py-[10px]"
       >
         <View className="flex-row">
-          <Text className="text-white">orders icon</Text>
+          <Image
+            source={require("../assets/OrdersIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">My Orders</Text>
         </View>
 
@@ -86,7 +98,10 @@ function Options({ navigation }) {
         className="flex-row justify-between bg-[#292929] px-[16px] py-[10px]"
       >
         <View className="flex-row">
-          <Text className="text-white">uploads icon</Text>
+          <Image
+            source={require("../assets/uploadIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">My Uploads</Text>
         </View>
 
@@ -107,7 +122,10 @@ function Options({ navigation }) {
         }}
       >
         <View className="flex-row">
-          <Text className="text-white">account icon</Text>
+          <Image
+            source={require("../assets/profileIcon.png")}
+            className=" object-contain"
+          />
           <Text className="text-white ml-[16px]">Account settings</Text>
         </View>
 

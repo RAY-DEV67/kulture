@@ -173,12 +173,10 @@ function AddAccount({ navigation }) {
         >
           Add Account
         </Text>
-        <Text
-          style={{ fontSize: getFontSize(15) }}
-          className="w-[70%] text-[#1c1c1c] mb-[24px]"
-        >
-          account Image
-        </Text>
+        <Image
+          source={require("../assets/addAccount.png")}
+          className="my-[32px] object-contain"
+        />
 
         <Formik
           initialValues={initialValues}

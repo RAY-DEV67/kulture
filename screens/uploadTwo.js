@@ -23,7 +23,7 @@ function UploadTwo({ navigation }) {
       </Text>
 
       <View>
-        <TouchableOpacity className="bg-gray-400 px-[32px] h-[40vh] flex-col items-center justify-center rounded-[8px] border border-white">
+        <TouchableOpacity className="bg-[#434343] px-[32px] h-[40vh] flex-col items-center justify-center rounded-[8px] border border-white">
           <AntDesign name="clouddownload" size={140} color="gray" />
           <Text>Browse for files or drag and drop them here</Text>
           <Text>Max. File Size: 500MB</Text>

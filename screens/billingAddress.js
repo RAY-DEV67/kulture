@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Text, View, TouchableOpacity, PixelRatio } from "react-native";
+import { Text, View, TouchableOpacity, PixelRatio, Image } from "react-native";
 
 function BillingAddress({ navigation }) {
   const fontScale = PixelRatio.getFontScale();
@@ -28,7 +28,10 @@ function BillingAddress({ navigation }) {
       </Text>
 
       <View className="flex-col items-center justify-center">
-        <Text>Address Image</Text>
+      <Image
+        source={require("../assets/billingImage.png")}
+        className="my-[16px] object-contain"
+      />
         <Text className="text-white">No billing address were found</Text>
       </View>
 
