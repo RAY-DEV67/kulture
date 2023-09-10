@@ -14,6 +14,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 import axios from "axios";
 import { useState, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Onboarded } from "../App";
+import Toast from "react-native-toast-message";
 
 const BASE_URL = "https://kulture-api.onrender.com/api/v1";
 
@@ -21,6 +23,7 @@ export default function Login({ navigation }) {
   const fontScale = PixelRatio.getFontScale();
   const getFontSize = (size) => size / fontScale;
   const [loading, setloading] = useState(false);
+  const { setonboarded } = useContext(Onboarded);
 
   const initialValues = {
     email: "",
@@ -37,6 +40,7 @@ export default function Login({ navigation }) {
     try {
       // Set onboarded as true in AsyncStorage
       await AsyncStorage.setItem("onboarded", "true");
+      console.log("Onboarded");
     } catch (error) {
       console.error("Error setting onboarded status:", error);
     }
@@ -47,22 +51,33 @@ export default function Login({ navigation }) {
     try {
       // Make API call to log in with email and password
       const response = await axios.post(`${BASE_URL}/signin`, values);
-
-      // Handle success response
-      // setUserId(true);
-      Alert.alert("Success", "Log In Successful");
-      console.log(response.data.data);
+      Toast.show({
+        type: "success", // Toast type (success, error, info)
+        position: "top", // Position of the toast (top, bottom)
+        text1: `Welcome Back🙌`, // Main text
+        text2: `Login succesful🎉`, // Subtext or additional information
+        visibilityTime: 3000, // Duration the toast should be visible (in milliseconds)
+        autoHide: true, // Hide the toast automatically after `visibilityTime`
+        topOffset: 50, // Customize the position from the top (in pixels)
+        bottomOffset: 40, // Customize the position from the bottom (in pixels)
+      });
+      setonboarded(true);
       handleOnboardingComplete();
-      navigation.navigate("Home");
+      console.log(response.data.data.user.attributes.user_type);
+      navigation.navigate("AfterHome");
+      await AsyncStorage.setItem(
+        "userData",
+        JSON.stringify(response.data.data.user.id)
+      );
+      await AsyncStorage.setItem(
+        "accessToken",
+        JSON.stringify(response.data.data.token)
+      );
+      await AsyncStorage.setItem(
+        "userType",
+        JSON.stringify(response.data.data.user.attributes.user_type)
+      );
       setloading(false);
-      // await AsyncStorage.setItem(
-      //   "userData",
-      //   JSON.stringify(response.data.data.userId)
-      // );
-      // await AsyncStorage.setItem(
-      //   "accessToken",
-      //   JSON.stringify(response.data.token)
-      // );
     } catch (error) {
       // Handle error response
       console.log(error.response.data);
@@ -83,7 +98,7 @@ export default function Login({ navigation }) {
           style={{ fontSize: getFontSize(18) }}
           className="text-white font-semibold"
         >
-          Welcome Back
+Continue
         </Text>
         <Image
           source={require("../assets/noProfile.jpg")}
@@ -110,20 +125,22 @@ export default function Login({ navigation }) {
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
               value={values.email}
-              className="border border-white my-[12px] text-white p-[8px] rounded-[8px]"
+              className="border border-white my-[12px] text-white px-[8px] py-[16px] rounded-[8px]"
             />
-            {touched.email && errors.email && <Text>{errors.email}</Text>}
+            {touched.email && errors.email && (
+              <Text className="text-red-500">{errors.email}</Text>
+            )}
 
             <Text className="text-white">Password</Text>
             <TextInput
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
               value={values.password}
-              className="border border-white my-[12px] text-white p-[8px] rounded-[8px]"
-              secureTextEntry
+              className="border border-white my-[12px] text-white px-[8px] py-[16px] rounded-[8px]"
+              // secureTextEntry
             />
             {touched.password && errors.password && (
-              <Text>{errors.password}</Text>
+              <Text className="text-red-500">{errors.password}</Text>
             )}
             <TouchableOpacity
               className="bg-[#6600e8] py-[16px] rounded-[10px] mt-[32px]"

@@ -1,3 +1,5 @@
+import { AntDesign } from "@expo/vector-icons";
+import Toast from "react-native-toast-message";
 import React from "react";
 import {
   Text,
@@ -9,6 +11,8 @@ import {
   Alert,
   Dimensions,
   PixelRatio,
+  Modal,
+  FlatList,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -17,6 +21,70 @@ import { useState } from "react";
 import Spinner from "react-native-loading-spinner-overlay";
 
 const BASE_URL = "https://kulture-api.onrender.com/api/v1";
+const Type = ["producer", "artiste"];
+
+function CustomDropdown({ options, selectedValue, onSelect }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  return (
+    <View>
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderWidth: 1,
+          borderColor: "white",
+          marginTop: 16,
+          padding: 8,
+          borderRadius: 10,
+        }}
+      >
+        <Text style={{ color: "white" }}>
+          {selectedValue || "Choose Genre"}
+        </Text>
+        <AntDesign
+          name={modalVisible ? "up" : "down"}
+          size={24}
+          color="white"
+        />
+      </TouchableOpacity>
+
+      <Modal visible={modalVisible} transparent animationType="slide">
+        <TouchableOpacity
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+          className="pt-[75vh] flex-col items-center justify-end w-[100vw]"
+          onPress={() => setModalVisible(false)}
+        >
+          <View className="bg-[#1c1c1c] border-t border-white h-[40vh] w-[100vw]">
+            <Text className="bg-gray-400 p-[16] text-white font-semibold">
+              Choose a Genre
+            </Text>
+            <FlatList
+              data={options}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    onSelect(item);
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text className="w-[100vw] px-[16px] py-[8px] text-white">
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    </View>
+  );
+}
 
 export default function SignUp({ navigation }) {
   const [loading, setloading] = useState(false);
@@ -48,13 +116,24 @@ export default function SignUp({ navigation }) {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setloading(true);
+
+    console.log(values);
     try {
       // Make API call to submit form data
       const response = await axios.post(`${BASE_URL}/register`, values);
 
       // Handle success response
       console.log(response.data);
-      Alert.alert("Success", "Account Created Succesfully");
+      Toast.show({
+        type: "success", // Toast type (success, error, info)
+        position: "top", // Position of the toast (top, bottom)
+        text1: `Welcome To Kulture🙌`, // Main text
+        text2: `Account created succesfully🎉`, // Subtext or additional information
+        visibilityTime: 3000, // Duration the toast should be visible (in milliseconds)
+        autoHide: true, // Hide the toast automatically after `visibilityTime`
+        topOffset: 50, // Customize the position from the top (in pixels)
+        bottomOffset: 40, // Customize the position from the bottom (in pixels)
+      });
       navigation.navigate("Login");
 
       // Reset form after successful submission
@@ -62,6 +141,7 @@ export default function SignUp({ navigation }) {
     } catch (error) {
       // Handle error response
       console.log(error.response.data);
+      Alert.alert("Error", error.response.data.message);
     }
     setloading(false);
     setSubmitting(false);
@@ -101,7 +181,7 @@ export default function SignUp({ navigation }) {
                 onChangeText={handleChange("first_name")}
                 onBlur={handleBlur("first_name")}
                 value={values.first_name}
-                className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
+                className="border border-white my-[12px] px-[8px] py-[16px] text-white rounded-[8px]"
               />
               {touched.first_name && errors.first_name && (
                 <Text className="text-red-500 mb-[16px]">
@@ -114,7 +194,7 @@ export default function SignUp({ navigation }) {
                 onChangeText={handleChange("last_name")}
                 onBlur={handleBlur("last_name")}
                 value={values.last_name}
-                className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
+                className="border border-white my-[12px] px-[8px] py-[16px] text-white rounded-[8px]"
               />
               {touched.last_name && errors.last_name && (
                 <Text className="text-red-500 mb-[16px]">
@@ -126,7 +206,7 @@ export default function SignUp({ navigation }) {
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
                 value={values.email}
-                className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
+                className="border border-white my-[12px] px-[8px] py-[16px] text-white rounded-[8px]"
               />
               {touched.email && errors.email && (
                 <Text className="text-red-500 mb-[16px]">{errors.email}</Text>
@@ -138,7 +218,7 @@ export default function SignUp({ navigation }) {
                 onChangeText={handleChange("username")}
                 onBlur={handleBlur("username")}
                 value={values.username}
-                className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
+                className="border border-white my-[12px] px-[8px] py-[16px] text-white rounded-[8px]"
               />
               {touched.username && errors.username && (
                 <Text className="text-red-500 mb-[16px]">
@@ -150,8 +230,8 @@ export default function SignUp({ navigation }) {
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
                 value={values.password}
-                secureTextEntry
-                className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
+                // secureTextEntry
+                className="border border-white my-[12px] px-[8px] py-[16px] text-white rounded-[8px]"
               />
               {touched.password && errors.password && (
                 <Text className="text-red-500 mb-[16px]">
@@ -164,24 +244,29 @@ export default function SignUp({ navigation }) {
                 onChangeText={handleChange("confirm_password")}
                 onBlur={handleBlur("confirm_password")}
                 value={values.confirm_password}
-                secureTextEntry
-                className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
+                // secureTextEntry
+                className="border border-white my-[12px] px-[8px] py-[16px] text-white rounded-[8px]"
               />
               {touched.confirm_password && errors.confirm_password && (
                 <Text className="text-red-500 mb-[16px]">
                   {errors.confirm_password}
                 </Text>
               )}
-
-              <Text className="text-white">
+              <Text className="mt-[16px] text-white">
+                {" "}
                 Are you an artiste or a producer?
               </Text>
-              <TextInput
+              <CustomDropdown
+                options={Type}
+                selectedValue={values.user_type}
+                onSelect={handleChange("user_type")}
+              />
+              {/* <TextInput
                 onChangeText={handleChange("user_type")}
                 onBlur={handleBlur("user_type")}
                 value={values.user_type}
                 className="border border-white my-[12px] p-[8px] text-white rounded-[8px]"
-              />
+              /> */}
               {touched.user_type && errors.user_type && (
                 <Text className="text-red-500 mb-[16px]">
                   {errors.user_type}

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import PopularBeatsCard from "../components/popularBeatsCard";
 import FeedCard from "../components/feedCard";
+import Spinner from "../components/spinner";
 
 const BASE_URL = "https://kulture-api.onrender.com/api/v1";
 
@@ -16,6 +17,7 @@ function Home({ navigation }) {
   const [popularBeats, setpopularBeats] = useState([]);
   const [loading, setloading] = useState(false);
   const [fetched, setfetched] = useState(false);
+  const [allBeats, setallBeats] = useState([]);
 
   const fetchData = async () => {
     setloading(true);
@@ -33,7 +35,24 @@ function Home({ navigation }) {
     }
   };
 
+  const fetchAllData = async () => {
+    setloading(true);
+    try {
+      const response = await fetch(
+        "https://kulture-api.onrender.com/api/v1/beats"
+      );
+      const data = await response.json();
+      setallBeats(data.data.data);
+      setfetched(true);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setloading(false);
+    }
+  };
+
   useEffect(() => {
+    fetchAllData();
     fetchData();
   }, [fetched]);
 
@@ -74,10 +93,8 @@ function Home({ navigation }) {
         >
           Popular Uploads
         </Text>
-
-        <View className="flex-row gap-3 mt-[16px]">
-          {loading && <Text className="text-white">Loading</Text>}
-
+        {loading && <Spinner />}
+        <View className="flex-row gap-3 mt-[16px] ">
           <View className="w-[45vw] my-[16px]">
             {popularBeats[0] ? (
               <PopularBeatsCard beats={popularBeats[0]} />
@@ -145,9 +162,11 @@ function Home({ navigation }) {
             <Text className="text-white text-center">Juju</Text>
           </View>
         </View>
-        {popularBeats?.map((items, index) => (
+
+        {loading && <Spinner />}
+        {allBeats?.map((items, index) => (
           <View key={index}>
-            <FeedCard beats={items} />
+            <FeedCard beats={items} navigation={navigation} />
           </View>
         ))}
       </View>

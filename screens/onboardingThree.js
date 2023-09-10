@@ -28,7 +28,7 @@ export default function OnboardingThree({ navigation }) {
         <View>
           <Text
             style={{ fontSize: getFontSize(25) }}
-            className="text-white font-semibold"
+            className="text-white font-semibold my-[16px]"
           >
             Sell Beats & Connect with Artists
           </Text>
